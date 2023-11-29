@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Painel extends Frame implements ActionListener {
+public class Screen extends Frame implements ActionListener {
     //LABELS
     private Label fim1 = new Label("Final");
     private Label fim2 = new Label("Final");
@@ -24,10 +24,24 @@ public class Painel extends Frame implements ActionListener {
     //THREADS
     private Count count1 = new Count();
     private Count count2 = new Count();
-    private Thread t1 = new Thread(count1);
-    private Thread t2 = new Thread(count2);
 
-    public Painel (String titulo, int largura, int altura, int colinic, int lininic){
+    public boolean checkCount(Count c){
+        if (count1.getName() == "Thread-1") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Count getC1(){
+        return count1;
+    }
+
+    public Count getC2(){
+        return count2;
+    }
+
+    public Screen (String titulo, int largura, int altura, int colinic, int lininic){
         super(titulo);
         setSize(largura, altura);
         setLocation(colinic, lininic);
@@ -70,15 +84,10 @@ public class Painel extends Frame implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == startButton){
+            count1.setName("Thread-1");
+            count2.setName("Thread-2");
             count1.setValue(Integer.parseInt(maxValue.getText()));
             count2.setValue(Integer.parseInt(maxValue.getText()));
-            
-            t1.setPriority(Integer.parseInt(priorityJTextField1.getText()));
-            t2.setPriority(Integer.parseInt(priorityJTextField2.getText()));
-            t1.start();
-            t2.start();
-
-            leftList.;
 
         } else if (e.getSource() == cleanButton){
 
