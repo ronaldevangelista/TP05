@@ -4,9 +4,12 @@ public class Count extends Thread{
     public void setValue(int i){
         this.i = i;
     }
+
     public void run(){
         for (int j = 0; j <= i; j++) {
             
         }
     }
+
+    
 }

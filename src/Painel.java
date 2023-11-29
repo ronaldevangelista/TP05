@@ -78,7 +78,8 @@ public class Painel extends Frame implements ActionListener {
             t1.start();
             t2.start();
 
-            
+            leftList.;
+
         } else if (e.getSource() == cleanButton){
 
         }
