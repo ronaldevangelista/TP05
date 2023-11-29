@@ -1,12 +1,14 @@
 public class Count extends Thread{
-    int i = 0;
+    int max = 0;
 
-    public void setValue(int i){
-        this.i = i;
+    public void setValue(int max){
+        this.max = max;
     }
 
+    Painel p = new Painel("Teste Thread", 480, 640, 250, 250);
+
     public void run(){
-        for (int j = 0; j <= i; j++) {
+        for (int j = 0; j <= max; j++) {
             
         }
     }
