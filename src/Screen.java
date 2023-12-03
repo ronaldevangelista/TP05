@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class Screen extends Frame implements ActionListener {
+
     //LABELS
     private Label fim1 = new Label("Final");
     private Label fim2 = new Label("Final");
@@ -22,23 +22,25 @@ public class Screen extends Frame implements ActionListener {
     private Container centerContainer = new Container();
     private Container northContainerTop = new Container();
     //THREADS
-    private Count count1 = new Count();
-    private Count count2 = new Count();
+    private Count count1;
+    private Count count2;
+    private Thread c1Thread;
+    private Thread c2Thread;
 
-    public boolean checkCount(Count c){
-        if (count1.getName() == "Thread-1") {
-            return true;
+    public void switchLabel1(){
+        if (fim1.isVisible()) {
+            fim1.setVisible(false);
         } else {
-            return false;
+            fim1.setVisible(true);
         }
     }
 
-    public Count getC1(){
-        return count1;
-    }
-
-    public Count getC2(){
-        return count2;
+    public void switchLabel2(){
+        if (fim2.isVisible()) {
+            fim2.setVisible(false);
+        } else {
+            fim2.setVisible(true);
+        }
     }
 
     public Screen (String titulo, int largura, int altura, int colinic, int lininic){
@@ -80,17 +82,29 @@ public class Screen extends Frame implements ActionListener {
 
         startButton.addActionListener(this);
         cleanButton.addActionListener(this);
+
+        count1 = new Count();
+        count2 = new Count();
+        c1Thread = new Thread(count1);
+        c2Thread = new Thread(count2);
     }
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == startButton){
-            count1.setName("Thread-1");
-            count2.setName("Thread-2");
             count1.setValue(Integer.parseInt(maxValue.getText()));
+            c1Thread.setName("Thread-1");
+            c1Thread.setPriority(Integer.parseInt(priorityJTextField1.getText()));
+
             count2.setValue(Integer.parseInt(maxValue.getText()));
+            c2Thread.setName("Thread-2");
+            c2Thread.setPriority(Integer.parseInt(priorityJTextField2.getText()));
+
+            c1Thread.start();
+            c2Thread.start();
 
         } else if (e.getSource() == cleanButton){
-
+            leftList.removeAll();
+            rightList.removeAll();
         }
     }
 }
